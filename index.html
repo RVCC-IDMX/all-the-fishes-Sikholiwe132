@@ -56,17 +56,30 @@
         //app.stage.addChild(fish2);
 
          //Add our third sprite
-         let fish3 = PIXI.Sprite.from("img/nemo.png");
+         let fish3 = PIXI.Sprite.from("img/goldfishadd.png");
          fish3.anchor.set(.5);
          fish3.scale.set(.5); 
          fish3.scale.x *= -1;
-         fish3.x = 100;
-         fish3.y = 100;
+         fish3.x = 200;
+         fish3.y = 130;
          fish3.tint = 0xFF9999;
         
 
         //Add it to the stage!
          app.stage.addChild(fish3);
+
+         //Add our fourth sprite
+         let fish4 = PIXI.Sprite.from("img/goldfish-05.png");
+         fish4.anchor.set(.55);
+         fish4.scale.set(.65); 
+         fish4.scale.x *= -1;
+         fish4.x = 280;
+         fish4.y = 500;
+         fish4.tint = 0xFF9999;
+        
+
+        //Add it to the stage!
+         app.stage.addChild(fish4);
 
            //Add our fourth sprite
            let seaweed = PIXI.Sprite.from("img/seaweed.png");
@@ -112,6 +125,9 @@
 
             // Create a back-and-forth motion for fish3 by changing its scale
             fish3.scale.x = -0.5 + Math.sin(counter / 50) / 2;
+
+            fish4.y = 300 + Math.sin(counter/50) * 30;
+            fish4.scale.x = -.45 + Math.sin(counter/2)/400;
 
 
             requestAnimationFrame(loop);
