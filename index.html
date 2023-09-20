@@ -35,7 +35,7 @@
         app.stage.addChild(fish1);
 
 
-         //Add our first sprite
+         //Add our second sprite
          let fish2 = PIXI.Sprite.from("img/goldfish.png");
          fish2.anchor.set(.5);
          fish2.scale.set(.5); 
@@ -48,10 +48,41 @@
         //Add it to the stage!
         //app.stage.addChild(fish2);
 
+         //Add our third sprite
+         let fish3 = PIXI.Sprite.from("img/nemo.png");
+         fish3.anchor.set(.5);
+         fish3.scale.set(.5); 
+         fish3.scale.x *= -1;
+         fish3.x = 50;
+         fish3.y = 50;
+         fish3.tint = 0xFF9999;
+        
+
+        //Add it to the stage!
+         app.stage.addChild(fish3);
+
+
+         //Add our fourth sprite
+         let fish4 = PIXI.Sprite.from("img/background.webp");
+         fish4.anchor.set(.5);
+         fish4.scale.set(.5); 
+         fish4.scale.x *= -1.;
+         fish4.x = 400;
+         fish4.y = 300;
+         fish4.tint = 0x99FF99;
+         
+
+        //Add it to the stage!
+        //app.stage.addChild(fish4);
+
+
+
         //Create new container
         let my_container = new PIXI.Container();
             my_container.addChild(fish1);
             my_container.addChild(fish2);
+            my_container.addChild(fish3);
+            my_container.addChild(fish4);
 
         //Add container to stage
         app.stage.addChild(my_container);
@@ -68,6 +99,9 @@
 
             fish2.y = 300 + Math.sin(counter/50) * 30;
             fish2.scale.x = -.25 + Math.sin(counter/2)/400;
+
+            fish3.y = 110 + Math.sin(counter/50) * 30;
+            fish3.scale.x = -.25 + Math.sin(counter/2)/400;
 
             requestAnimationFrame(loop);
 
