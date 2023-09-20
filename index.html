@@ -6,6 +6,7 @@
     <title>All the Fishes</title>
     <script src="https://pixijs.download/release/pixi.js"></script>
 
+    
 </head>
 <body>
 
@@ -13,14 +14,19 @@
     <script>
         //The App 
         const app = new PIXI.Application({
-            width:640,
-            height:480,
+            width: 640, 
+            height: 480,
             backgroundColor: 0x088F8F,
         });
 
-         //Add view to document 
-         document.body.appendChild(app.view);
+        // Add view to document
+        document.body.appendChild(app.view);
 
+        // Add background sprite
+        const background = PIXI.Sprite.from("img/background.png");
+        background.width = app.screen.width; // Set the width to match the screen width
+        background.height = app.screen.height; // Set the height to match the screen height
+        app.stage.addChild(background);
 
         //Add our first sprite
         let fish1 = PIXI.Sprite.from("img/goldfish.png");
@@ -54,8 +60,8 @@
          fish3.anchor.set(.5);
          fish3.scale.set(.5); 
          fish3.scale.x *= -1;
-         fish3.x = 50;
-         fish3.y = 50;
+         fish3.x = 100;
+         fish3.y = 100;
          fish3.tint = 0xFF9999;
         
 
@@ -67,8 +73,8 @@
          seaweed.anchor.set(.5);
          seaweed.scale.set(.5); 
          seaweed.scale.x *= -1;
-         seaweed.x = 400;
-         seaweed.y = 400;
+         seaweed.x = 450;
+         seaweed.y = 450;
          seaweed.tint = 0xFF9999;
         
 
@@ -100,9 +106,12 @@
             fish2.y = 300 + Math.sin(counter/50) * 30;
             fish2.scale.x = -.25 + Math.sin(counter/2)/400;
 
-            fish3.y = 110 + Math.sin(counter/50) * 30;
-            fish3.scale.x = -.25 + Math.sin(counter/2)/400;
+            const fish3XSpeed = 2; // Adjust the speed as needed
+            const screenWidth = app.screen.width; // Get the width of the screen
+            fish3.x = 50 + (counter * fish3XSpeed) % (screenWidth + 100);
 
+            // Create a back-and-forth motion for fish3 by changing its scale
+            fish3.scale.x = -0.5 + Math.sin(counter / 50) / 2;
 
 
             requestAnimationFrame(loop);
