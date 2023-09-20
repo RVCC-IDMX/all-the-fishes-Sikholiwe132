@@ -76,7 +76,6 @@
          fish4.x = 280;
          fish4.y = 500;
          
-        
 
         //Add it to the stage!
          app.stage.addChild(fish4);
@@ -110,7 +109,6 @@
 
         const colorMatrixFilter = new PIXI.filters.ColorMatrixFilter();
 
-
         //Animation loop!
         function loop() {
 
@@ -122,11 +120,11 @@
             fish2.y = 300 + Math.sin(counter/50) * 30;
             fish2.scale.x = -.25 + Math.sin(counter/2)/400;
 
-            const fish3XSpeed = 2; // Adjust the speed as needed
-            const screenWidth = app.screen.width; // Get the width of the screen
+            const fish3XSpeed = 2; // speed of fish
+            const screenWidth = app.screen.width; 
             fish3.x = 50 + (counter * fish3XSpeed) % (screenWidth + 100);
 
-            // Create a back-and-forth motion for fish3 by changing its scale
+            // Creating a back-and-forth motion for fish3 
             fish3.scale.x = -0.5 + Math.sin(counter / 50) / 2;
 
             fish4.y = 300 + Math.sin(counter/50) * 30;
@@ -134,7 +132,7 @@
 
             colorMatrixFilter.hue(counter / 3);
 
-            // Apply the filter to fish4
+            // fish4 changing color 
             fish4.filters = [colorMatrixFilter];
 
 
