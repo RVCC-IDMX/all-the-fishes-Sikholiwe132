@@ -75,7 +75,7 @@
          fish4.scale.x *= -1;
          fish4.x = 280;
          fish4.y = 500;
-         fish4.tint = 0xFF9999;
+         
         
 
         //Add it to the stage!
@@ -101,11 +101,14 @@
             my_container.addChild(fish2);
             my_container.addChild(fish3);
             my_container.addChild(seaweed); 
+            app.stage.addChild(my_container);
 
         //Add container to stage
         app.stage.addChild(my_container);
 
         let counter = 0;
+
+        const colorMatrixFilter = new PIXI.filters.ColorMatrixFilter();
 
 
         //Animation loop!
@@ -128,6 +131,12 @@
 
             fish4.y = 300 + Math.sin(counter/50) * 30;
             fish4.scale.x = -.45 + Math.sin(counter/2)/400;
+
+            colorMatrixFilter.hue(counter / 3);
+
+            // Apply the filter to fish4
+            fish4.filters = [colorMatrixFilter];
+
 
 
             requestAnimationFrame(loop);
