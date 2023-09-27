@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All the Fishes</title>
     <script src="https://pixijs.download/release/pixi.js"></script>
 
-    
+
 </head>
+
 <body>
 
-   
+
     <script>
         //The App 
         const app = new PIXI.Application({
-            width: 640, 
+            width: 640,
             height: 480,
             backgroundColor: 0x088F8F,
         });
@@ -22,85 +24,102 @@
         // Add view to document
         document.body.appendChild(app.view);
 
+
         // Add background sprite
         const background = PIXI.Sprite.from("img/background.png");
         background.width = app.screen.width; // Set the width to match the screen width
         background.height = app.screen.height; // Set the height to match the screen height
         app.stage.addChild(background);
 
+
         //Add our first sprite
         let fish1 = PIXI.Sprite.from("img/goldfish.png");
-         fish1.anchor.set(.5);
-         fish1.scale.set(.5); 
-         fish1.scale.x *= -1;
-         fish1.x = 150;
-         fish1.y = 150;
-         fish1.tint = 0xFF9999;
-        
+        fish1.anchor.set(.5);
+        fish1.scale.set(.5);
+        fish1.scale.x *= -1;
+        fish1.x = 150;
+        fish1.y = 150;
+        fish1.tint = 0xFF9999;
+
 
         //Add it to the stage!
         app.stage.addChild(fish1);
 
 
-         //Add our second sprite
-         let fish2 = PIXI.Sprite.from("img/goldfish.png");
-         fish2.anchor.set(.6);
-         fish2.scale.set(.5); 
-         fish2.scale.x *= -1;
-         fish2.x = 400;
-         fish2.y = 300;
-         fish2.tint = 0x99FF99;
-         
+        //Add our second sprite
+        let fish2 = PIXI.Sprite.from("img/goldfish.png");
+        fish2.anchor.set(.65);
+        fish2.scale.set(.5);
+        fish2.scale.x *= -1;
+        fish2.x = 450;
+        fish2.y = 100;
+        fish2.tint = 0x99FF99;
+
 
         //Add it to the stage!
         //app.stage.addChild(fish2);
 
-         //Add our third sprite
-         let fish3 = PIXI.Sprite.from("img/goldfishadd.png");
-         fish3.anchor.set(.5);
-         fish3.scale.set(.5); 
-         fish3.scale.x *= -1;
-         fish3.x = 200;
-         fish3.y = 130;
-         fish3.tint = 0xFF9999;
-        
+        //Add our third sprite
+        let fish3 = PIXI.Sprite.from("img/goldfishadd.png");
+        fish3.anchor.set(.5);
+        fish3.scale.set(.5);
+        fish3.scale.x *= -1;
+        fish3.x = 380;
+        fish3.y = 110;
+        fish3.tint = 0xFF9999;
+
 
         //Add it to the stage!
-         app.stage.addChild(fish3);
+        app.stage.addChild(fish3);
 
-         //Add our fourth sprite
-         let fish4 = PIXI.Sprite.from("img/goldfish-05.png");
-         fish4.anchor.set(.55);
-         fish4.scale.set(.65); 
-         fish4.scale.x *= -1;
-         fish4.x = 280;
-         fish4.y = 500;
-         
+        //Add our fourth sprite
+        let fish4 = PIXI.Sprite.from("img/goldfish-05.png");
+        fish4.anchor.set(.55);
+        fish4.scale.set(.65);
+        fish4.scale.x *= -1;
+        fish4.x = 300;
+        fish4.y = 500;
 
-        //Add it to the stage!
-         app.stage.addChild(fish4);
-
-           //Add our fourth sprite
-           let seaweed = PIXI.Sprite.from("img/seaweed.png");
-         seaweed.anchor.set(.5);
-         seaweed.scale.set(.5); 
-         seaweed.scale.x *= -1;
-         seaweed.x = 450;
-         seaweed.y = 450;
-         seaweed.tint = 0xFF9999;
-        
 
         //Add it to the stage!
-         app.stage.addChild(seaweed);
+        app.stage.addChild(fish4);
+
+        //Add our fourth sprite
+        let seaweed = PIXI.Sprite.from("img/seaweed.png");
+        seaweed.anchor.set(.5);
+        seaweed.scale.set(.5);
+        seaweed.scale.x *= -1;
+        seaweed.x = 400;
+        seaweed.y = 445;
+        seaweed.tint = 0xFF9999;
+
+
+        //Add it to the stage!
+        app.stage.addChild(seaweed);
+
+
+        //Add our fifth sprite
+        let button = PIXI.Sprite.from("img/button.png");
+        button.anchor.set(.25);
+        button.scale.set(.25);
+        button.scale.x *= -1;
+        button.x = 600;
+        button.y = 30;
+
+
+        //Add it to the stage!
+        app.stage.addChild(button);
 
 
         //Create new container
         let my_container = new PIXI.Container();
-            my_container.addChild(fish1);
-            my_container.addChild(fish2);
-            my_container.addChild(fish3);
-            my_container.addChild(seaweed); 
-            app.stage.addChild(my_container);
+        my_container.addChild(fish1);
+        my_container.addChild(fish2);
+        my_container.addChild(fish3);
+        my_container.addChild(fish4);
+        my_container.addChild(button);
+        my_container.addChild(seaweed);
+        app.stage.addChild(my_container);
 
         //Add container to stage
         app.stage.addChild(my_container);
@@ -109,32 +128,132 @@
 
         const colorMatrixFilter = new PIXI.filters.ColorMatrixFilter();
 
+        // Event listener for the button
+        button.interactive = true;
+        button.buttonMode = true;
+
+        // Initialize a flag to track if the button was clicked
+        let buttonClicked = false;
+
+        button.on("pointertap", () => {
+            if (!buttonClicked) {
+                // Change the color of fish4 by applying a color filter
+                const colorMatrixFilter = new PIXI.filters.ColorMatrixFilter();
+                colorMatrixFilter.hue(Math.random() * 360);
+                fish4.filters = [colorMatrixFilter];
+                buttonClicked = true;
+
+                // Reset the buttonClicked flag after a delay 
+                setTimeout(() => {
+                    buttonClicked = false;
+                }, 200);
+            }
+        });
+
+        // Enable interactivity
+        fish3.interactive = true;
+        fish3.buttonMode = true;
+
+        // Draggable event listeners
+        fish3.draggable = true; // Make fish3 draggable
+        fish3.dragging = false; // Set initial dragging state to false
+        fish3.offsetX = 0; // Initialize offsetX
+        fish3.offsetY = 0; // Initialize offsetY
+
+        fish3.on("pointerdown", (e) => {
+            fish3.dragging = true;
+            fish3.offsetX = fish3.x - e.global.x;
+            fish3.offsetY = fish3.y - e.global.y;
+        });
+
+        fish3.on("pointermove", (e) => {
+            if (fish3.dragging) {
+                fish3.x = e.global.x + fish3.offsetX;
+                fish3.y = e.global.y + fish3.offsetY;
+            }
+        });
+
+        fish3.on("pointerup", () => {
+            fish3.dragging = false;
+        });
+
+        fish3.on("pointerupoutside", () => {
+            fish3.dragging = false;
+        });
+
+        //Slider
+        class Slider extends PIXI.Container {
+            constructor() {
+                super();
+
+                this.interactive = true
+
+                //Extra variables
+                this.dragging = false;
+                this.value = 0;
+
+                //The Track
+                let track = new PIXI.Graphics();
+                track.beginFill(0xEEEEEE);
+                track.drawRect(0, -5, 200, 10);
+                track.endFill();
+
+                this.addChild(track);
+
+                //The Slide
+                let slide = new PIXI.Graphics();
+                slide.beginFill(0xCCCCCC);
+                slide.drawRect(-20, -20, 40, 40);
+                slide.endFill();
+
+                this.addChild(slide);
+
+                //Events 
+                this.on("pointerdown", (e) => {
+                    this.dragging = true;
+                });
+                this.on("pointermove", (e) => {
+                    if (this.dragging) {
+                        //Move the slider
+                        slide.x = e.global.x - this.getGlobalPosition().x;
+                        //Check constraints 
+                        if (slide.x > track.width) slide.x = track.width;
+                        if (slide.x < 0) slide.x = 0;
+                        //Check value
+                        this.value = slide.x / track.width;
+
+                        fish1.scale.set(0.5 + this.value * 1.5);
+                    }
+                });
+                this.on("pointerup", (e) => {
+                    this.dragging = false;
+                });
+                this.on("pointerupoutside", (e) => {
+                    this.dragging = false;
+                });
+            }
+        }
+
+        //Make a Slider
+        let mySlider = new Slider();
+        mySlider.x = 40;
+        mySlider.y = 35;
+
+        app.stage.addChild(mySlider);
+
         //Animation loop!
         function loop() {
 
             counter++;
 
-            fish1.y = 200 + Math.sin(counter/40) * 30;
-            fish1.scale.x = .25 + Math.sin(counter/2)/400;
+            fish1.y = 200 + Math.sin(counter / 40) * 30;
+            fish1.scale.x = .25 + Math.sin(counter / 2) / 400;
 
-            fish2.y = 300 + Math.sin(counter/50) * 30;
-            fish2.scale.x = -.25 + Math.sin(counter/2)/400;
+            fish2.y = 300 + Math.sin(counter / 50) * 30;
+            fish2.scale.x = -.25 + Math.sin(counter / 2) / 400;
 
-            const fish3XSpeed = 2; // speed of fish
-            const screenWidth = app.screen.width; 
-            fish3.x = 50 + (counter * fish3XSpeed) % (screenWidth + 100);
-
-            // Creating a back-and-forth motion for fish3 
-            fish3.scale.x = -0.5 + Math.sin(counter / 50) / 2;
-
-            fish4.y = 300 + Math.sin(counter/50) * 30;
-            fish4.scale.x = -.45 + Math.sin(counter/2)/400;
-
-            colorMatrixFilter.hue(counter / 3);
-
-            // fish4 changing color 
-            fish4.filters = [colorMatrixFilter];
-
+            fish4.y = 300 + Math.sin(counter / 50) * 80;
+            fish4.scale.x = -.55 + Math.sin(counter / 2) / 400;
 
 
             requestAnimationFrame(loop);
@@ -142,7 +261,10 @@
         }
         loop();
 
+
+
     </script>
-    
+
 </body>
+
 </html>
